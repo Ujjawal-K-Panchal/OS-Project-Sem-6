@@ -63,7 +63,7 @@ def FCFS():
         lock.acquire()
         obj.run()
         lock.release()
-        
+
     Nlist[0].tat = Nlist[0].bt
     Nlist[0].wt = 0
     avg_tat+= Nlist[0].tat
@@ -77,9 +77,9 @@ def FCFS():
     print("Average Waiting Time :",avg_wt)
     print("Average Turn Around Time:",avg_tat)
     time.sleep(0.5)
-    
-    
-        
+
+
+
 
 def SJF():
     Nlist = input_NThread()
@@ -103,8 +103,57 @@ def SJF():
     print("Average Waiting Time :",avg_wt)
     print("Average Turn Around Time:",avg_tat)
     time.sleep(0.5)
-    
-    
+
+
+
+
+def RoundRobin():
+    Nlist = input_NThread()
+    avg_tat=0
+    avg_wt=0
+    quantum = int(input ('Enter Quantum Time :>'))
+    n = len(Nlist)
+    rem_bt = [0] * len(Nlist)
+
+    for i in range(len(Nlist)):
+        rem_bt[i] = Nlist[i].bt
+    t = 0
+
+    while(1):
+        done = True
+        for i in range(len(Nlist)):
+            if (rem_bt[i] > 0) :
+                done = False
+
+                if (rem_bt[i] > quantum) :
+                    t += quantum
+                    rem_bt[i] -= quantum
+                else:
+                    t = t + rem_bt[i]
+                    Nlist[i].wt = t - Nlist[i].bt
+                    rem_bt[i] = 0
+
+        if (done == True):
+            break
+
+    for i in range(n):
+        Nlist[i].tat = Nlist[i].bt + Nlist[i].wt
+
+    total_wt = 0
+    total_tat = 0
+    for i in range(n):
+        total_wt = total_wt +Nlist[i].wt
+        total_tat = total_tat +Nlist[i].tat
+
+    avg_tat=total_tat/len(Nlist)
+    avg_wt=total_wt/len(Nlist)
+
+    print("Average Waiting Time :",avg_wt)
+    print("Average Turn Around Time:",avg_tat)
+
+
+
+
 #Priority Threading
 def Priority():
 	Nlist = input_NThread2()
@@ -129,13 +178,13 @@ def Priority():
 	print("Average Turn Around Time: ",avg_tat)
 	time.sleep(0.5)
 
-    
 
-        
+
+
 opt = 0
 
 while (opt!=6):
-    
+
     print(Title)
     load_bar()
 
@@ -147,13 +196,13 @@ while (opt!=6):
       FCFS()
     elif(opt == 2):
       SJF()
-    
+
     elif(opt == 3):
       Priority()
-    
+
     elif (opt == 4):
-        #Round Robin
-        break
+      RoundRobin()
+      
     elif(opt == 5):
         Credits_display()
     elif(opt == 6):
