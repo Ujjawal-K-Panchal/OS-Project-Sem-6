@@ -17,6 +17,7 @@ class NThread (Thread): #Class for SJF and FCFS.
     bt = 0
     tat = 0
     wt = 0
+    p = 0
     def __init__(self, name,bt):
         self.name = name
         self.bt = bt
