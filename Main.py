@@ -111,7 +111,7 @@ def RoundRobin():
     Nlist = input_NThread()
     avg_tat=0
     avg_wt=0
-    quantum = int(input ('Enter Quantum Time :>'))
+    quantum = int(input ('Enter Quantum Time :> '))
     n = len(Nlist)
     rem_bt = [0] * len(Nlist)
 
@@ -121,6 +121,7 @@ def RoundRobin():
 
     while(1):
         done = True
+        time.sleep(0.25)
         for i in range(len(Nlist)):
             if (rem_bt[i] > 0) :
                 done = False
@@ -128,11 +129,14 @@ def RoundRobin():
                 if (rem_bt[i] > quantum) :
                     t += quantum
                     rem_bt[i] -= quantum
+                    print("Process :",Nlist[i].name, "used :",str(quantum), " remaining bt :",rem_bt[i])
                 else:
+                    
+                    print("Process :",Nlist[i].name, "used :",str(quantum), " remaining bt : 0")
                     t = t + rem_bt[i]
                     Nlist[i].wt = t - Nlist[i].bt
                     rem_bt[i] = 0
-
+        
         if (done == True):
             break
 
@@ -150,7 +154,7 @@ def RoundRobin():
 
     print("Average Waiting Time :",avg_wt)
     print("Average Turn Around Time:",avg_tat)
-
+    time.sleep(1.5)
 
 
 
