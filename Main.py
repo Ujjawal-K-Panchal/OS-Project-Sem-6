@@ -18,9 +18,10 @@ class NThread (Thread): #Class for SJF and FCFS.
     tat = 0
     wt = 0
     p = 0
-    def __init__(self, name,bt):
+    def __init__(self, name,bt, p = 0):
         self.name = name
         self.bt = bt
+        self.p = p
     def run(self):
         for i in range(1,self.bt+1):
             print('Thread',self.name,'burst number :',i)
@@ -48,7 +49,7 @@ def input_NThread2():
 		name = input('Enter Thread\'s name :>  ')
 		bt = int(input('Enter Thread Burst Time :>  '))
 		p = int(input('Enter priortiy :> '))
-		N = Nthread(name,bt,p)
+		N = NThread(name,bt,p)
 		Nlist.append(N)
 	return Nlist
 
@@ -117,7 +118,7 @@ def Priority():
 	Nlist[0].wt=0
 	Nlist[0].tat = Nlist[0].bt
 	avg_tat += Nlist[0].tat
-	for i in range(1,len,(Nlist)):
+	for i in range(1,len(Nlist)):
 		Nlist[i].wt = Nlist[i-1].wt + Nlist[i-1].bt
 		Nlist[i].tat = Nlist[i].wt + Nlist[i].bt
 		avg_wt += Nlist[i].wt
