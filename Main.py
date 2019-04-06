@@ -41,7 +41,7 @@ def input_NThread():
     return Nlist
 
 #User input for priority thread:
-def input_Nthread2():
+def input_NThread2():
 	Nlist = []
 	n = int(input('Enter the number of threads :> '))
 	for i in range(n):
@@ -105,7 +105,7 @@ def SJF():
     
     
 #Priority Threading
-def Prioirty():
+def Priority():
 	Nlist = input_NThread2()
 	Nlist.sort(key = lambda x: x.p)
 	avg_wt = 0
